@@ -106,8 +106,8 @@ public partial class Test_01 : System.Web.UI.Page
         TextBox4.Text = string.Empty;
         TextBox5.Text = string.Empty;
         TextBox6.Text = string.Empty;
-       
-        DropDownList1.SelectedIndex = 0; 
+
+        DropDownList1.SelectedIndex = 0;
         DropDownList2.SelectedIndex = 0;
         DropDownList3.SelectedIndex = 0;
         DropDownList4.SelectedIndex = 0;
@@ -130,11 +130,22 @@ public partial class Test_01 : System.Web.UI.Page
             }
             else
             {
-                return "ES" + originalID.PadLeft(4, '0'); 
+                return "ES" + originalID.PadLeft(4, '0');
             }
         }
         return string.Empty;
     }
 
 
+     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+     {
+         string employeeID = GridView1.DataKeys[e.RowIndex].Values["Emp_ID"].ToString();
+
+         SqlConnection connec = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
+         connec.Open();
+         SqlCommand cmd = new SqlCommand("DELETE FROM Test WHERE [Emp_ID] = '" + employeeID + "'", connec);
+         cmd.ExecuteNonQuery();
+         connec.Close();
+         GridDat();
+     }
 }

@@ -16,17 +16,29 @@
         }
         .mainDiv{
             margin: 0 auto; 
-            width: 50%; 
+            width: 45%; 
             overflow: hidden;
         }
         .cent{
-           
+           width:85px;
+           height:25px;
+           border:1.5px solid;
+           background-color:lightskyblue;
+           margin-left:42.5%;
         }
+
+        .cent2{
+           width:85px;
+           height:25px;
+           border:1.5px solid;
+           background-color:lightskyblue;
+          
+        }
+
          .registration-section {
             text-align: center;
-            background-color:cornflowerblue;
-            
-            padding: 10px; /* Add padding for better appearance */
+            background-color:darkgray;
+            padding: 10px;
         }
         hr {
             border: 1px solid black;
@@ -149,7 +161,7 @@
                         </asp:DropDownList></td>
                 </tr>
                 <tr>
-                    <td class="align"><asp:Label ID="Label13" runat="server" Text="Probabation Period: "></asp:Label></td>
+                    <td class="align"><asp:Label ID="Label13" runat="server" Text="Probation Period: "></asp:Label></td>
                     <td><asp:DropDownList ID="DropDownList8" runat="server">
                         <asp:ListItem Text="--Select--" Value="" Selected="True"></asp:ListItem>
                         <asp:ListItem Value="3"></asp:ListItem>
@@ -170,9 +182,11 @@
                 </tr>
             </table> 
         </div>
-            </div>
-            <asp:Button ID="Button1" CssClass="cent" runat="server" Text="Submit" onclick="DataSubmit"/>&nbsp&nbsp&nbsp
-            <asp:Button ID="Button2" CssClass="cent" runat="server" Text="Reset" OnClick="ResetClick" /><br /><br />
+            </div><br /><br />
+           
+         <asp:Button ID="Button1" CssClass="cent" runat="server" Text="Submit" onclick="DataSubmit"/>&nbsp&nbsp&nbsp
+            <asp:Button ID="Button2" CssClass="cent2" runat="server" Text="Reset" OnClick="ResetClick" /><br /><br />
+
 
         <asp:LinkButton ID="LinkButton1" runat="server">Export To Excel</asp:LinkButton>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         <asp:Label ID="Label16" runat="server" Text="Search By Employee Name: "></asp:Label>
@@ -181,21 +195,22 @@
 
 
 
-        <asp:GridView ID="GridView1" runat="server"  Width="100%" AutoGenerateColumns="False"  OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit" AllowPaging="true" PageSize="25" OnPageIndexChanging="Gridpaging">
+        <asp:GridView ID="GridView1" runat="server"  Width="100%" AutoGenerateColumns="False"  OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelingEdit" AllowPaging="true" PageSize="25" OnPageIndexChanging="Gridpaging"
+            DataKeyNames="Emp_ID" OnRowDeleting="GridView1_RowDeleting">
             <Columns>
-                 <asp:TemplateField HeaderText="S.No" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="S.No" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                           <%# Container.DataItemIndex + 1 %>
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Emp ID"  HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left" >
+                <asp:TemplateField HeaderText="Emp ID"  HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left" >
                     <ItemTemplate>
                 <asp:Label ID="lbl_ID" runat="server" Text='<%# TransformEmpID(Eval("Emp_ID")) %>'></asp:Label>
             </ItemTemplate>
                  </asp:TemplateField>
 
-                  <asp:TemplateField HeaderText="Emp Name" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                  <asp:TemplateField HeaderText="Emp Name" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_Name" runat="server" Text='<%#Eval("Emp_Name") %>'></asp:Label>
                     </ItemTemplate>
@@ -204,7 +219,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                <asp:TemplateField HeaderText="Desig"  HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left" >
+                <asp:TemplateField HeaderText="Desig"  HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left" >
                     <ItemTemplate>
                         <asp:Label ID="lbl_Desig" runat="server" Text='<%#Eval("Designation") %>'></asp:Label>
                     </ItemTemplate>
@@ -213,7 +228,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="DOB" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="DOB" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_DOB" runat="server" Text='<%#Eval("Date_Of_Birth") %>'></asp:Label>
                     </ItemTemplate>
@@ -222,7 +237,7 @@
                     </EditItemTemplate>
                  </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="DOJ" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="DOJ" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_DOJ" runat="server" Text='<%#Eval("Date_Of_Joining") %>'></asp:Label>
                     </ItemTemplate>
@@ -231,7 +246,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="Prev Exp" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="Prev Exp" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_Prev" runat="server" Text='<%#Eval("Previous_Experience") %>'></asp:Label>
                     </ItemTemplate>
@@ -240,7 +255,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="Probation" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="Probation" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_Prob" runat="server" Text='<%#Eval("Probabation") %>'></asp:Label>
                     </ItemTemplate>
@@ -249,7 +264,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="Gender" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="Gender" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_Gender" runat="server" Text='<%#Eval("Gender") %>'></asp:Label>
                     </ItemTemplate>
@@ -258,7 +273,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="Email" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="Email" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_email" runat="server" Text='<%#Eval("Email") %>'></asp:Label>
                     </ItemTemplate>
@@ -267,7 +282,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="Grade" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="Grade" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_Grade" runat="server" Text='<%#Eval("Grade") %>'></asp:Label>
                     </ItemTemplate>
@@ -276,7 +291,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="Division" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="Division" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_Div" runat="server" Text='<%#Eval("Division") %>'></asp:Label>
                     </ItemTemplate>
@@ -285,7 +300,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="R.M" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="R.M" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_RM" runat="server" Text='<%#Eval("Reporting_Manager") %>'></asp:Label>
                     </ItemTemplate>
@@ -294,7 +309,7 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-                 <asp:TemplateField HeaderText="Shift" HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+                 <asp:TemplateField HeaderText="Shift" HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <asp:Label ID="lbl_Shift" runat="server" Text='<%#Eval("Shift") %>'></asp:Label>
                     </ItemTemplate>
@@ -303,9 +318,10 @@
                     </EditItemTemplate>
                 </asp:TemplateField>
 
-              <asp:TemplateField HeaderStyle-BackColor="#66CCFF" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left">
+              <asp:TemplateField HeaderStyle-BackColor="lightskyblue" ItemStyle-BackColor="#CCCCCC" HeaderStyle-HorizontalAlign="Left" >
                 <ItemTemplate>
                     <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" BackColor="#CCCCCC" Font-Underline="True" ForeColor="#3333CC" BorderColor="#CCCCCC" BorderStyle="None" />
+                    <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Eval("Emp_ID") %>'  BackColor="#CCCCCC" Font-Underline="True" ForeColor="#3333CC" BorderColor="#CCCCCC" BorderStyle="None"/>
                 </ItemTemplate>    
                   <EditItemTemplate>
                         <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" BackColor="#CCCCCC" Font-Underline="True" ForeColor="#3333CC" BorderColor="#CCCCCC" BorderStyle="None" />
