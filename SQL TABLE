@@ -69,3 +69,32 @@ BEGIN
         @val13
     );
 END;
+
+
+---------------------------------------------------------------------------------------------
+
+Extra Information:-
+
+--to change table column to not null
+/*ALTER TABLE Test
+ALTER COLUMN Emp_ID INT NOT NULL;*/
+
+--to change table datatype
+/*ALTER TABLE Test
+ALTER COLUMN EMP_ID nvarchar(50);*/
+
+-- to Set primary key constraint
+/*ALTER TABLE Test
+ADD CONSTRAINT PK_Emp_ID PRIMARY KEY (Emp_ID);*/
+
+--to get overall information of the table named Test:-
+/*ALTER TABLE Test
+DROP CONSTRAINT PK_Emp_ID;*/
+/*SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'Test';*/
+
+--to see Primary Key in sql-server:-
+SELECT CONSTRAINT_NAME, COLUMN_NAME
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE TABLE_NAME = 'Test' AND CONSTRAINT_NAME LIKE 'PK%';
