@@ -1,0 +1,16 @@
+Unchecked - Not Null
+Checked - Can be Null
+
+Emp_ID	int	Unchecked Primary-Key
+Emp_Name	nvarchar(50)	Checked
+Designation	nvarchar(50)	Checked
+Date_Of_Birth	nvarchar(50)	Checked
+Date_Of_Joining	nvarchar(50)	Checked
+Previous_Experience	float	Checked
+Probabation	smallint	Checked
+Gender	nvarchar(50)	Checked
+Email	nvarchar(50)	Checked
+Grade	nvarchar(50)	Checked
+Division	nvarchar(50)	Checked
+Reporting_Manager	nvarchar(50)	Checked
+Shift	nvarchar(50)	Checked
