@@ -38,7 +38,7 @@ The Following is Insertion Procedure:-
     @val13 nvarchar(50)
 AS
 BEGIN
-    INSERT INTO Test_01_Table (
+    INSERT INTO Test(
         [Emp_ID], 
         [Emp_Name], 
         [Designation], 
