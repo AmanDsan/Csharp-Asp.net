@@ -1,7 +1,7 @@
 Unchecked - Not Null
 Checked - Can be Null
 
-Emp_ID	int	Unchecked Primary-Key
+Emp_ID	nvarchar(50)	Unchecked Primary-Key
 Emp_Name	nvarchar(50)	Checked
 Designation	nvarchar(50)	Checked
 Date_Of_Birth	nvarchar(50)	Checked
