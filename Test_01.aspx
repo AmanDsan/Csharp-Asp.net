@@ -188,7 +188,7 @@
             <asp:Button ID="Button2" CssClass="cent2" runat="server" Text="Reset" OnClick="ResetClick" /><br /><br />
 
 
-        <asp:LinkButton ID="LinkButton1" runat="server">Export To Excel</asp:LinkButton>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="lbtn_export_Click">Export To Excel</asp:LinkButton>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         <asp:Label ID="Label16" runat="server" Text="Search By Employee Name: "></asp:Label>
         <asp:TextBox ID="TextBox6" runat="server" OnTextChanged="SearchBox" AutoPostBack="true" ></asp:TextBox><br /><br />
 

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,14 +14,15 @@ using System.Web.UI.WebControls;
 
 public partial class Test_01 : System.Web.UI.Page
 {
+    SqlConnection connec = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"].ToString());
     protected void Page_Load(object sender, EventArgs e)
     {
-
+      
     }
 
     protected void DataSubmit(object sender, EventArgs e)
     {
-        SqlConnection connec = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"].ToString());
+       // SqlConnection connec = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"].ToString());
         connec.Open();
         using (SqlCommand cmd = new SqlCommand("InsertTestData", connec))
         {
@@ -46,7 +50,7 @@ public partial class Test_01 : System.Web.UI.Page
     protected void GridDat()
     {
         string query = "Select * From Test";
-        SqlConnection connec = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"].ToString());
+       // SqlConnection connec = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"].ToString());
         SqlCommand com = new SqlCommand(query, connec);
         SqlDataAdapter adapter = new SqlDataAdapter(com);
         DataTable dt = new DataTable();
@@ -80,8 +84,8 @@ public partial class Test_01 : System.Web.UI.Page
         string searchKeyword = TextBox6.Text.Trim();
         string query = "SELECT * FROM Test WHERE Emp_Name LIKE @searchKeyword";
 
-        using (SqlConnection connec = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
-        {
+       // using (SqlConnection connec = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
+        //{
             using (SqlCommand cmd = new SqlCommand(query, connec))
             {
                 cmd.Parameters.AddWithValue("@searchKeyword", "%" + searchKeyword + "%");
@@ -94,7 +98,8 @@ public partial class Test_01 : System.Web.UI.Page
                 GridView1.DataSource = dt;
                 GridView1.DataBind();
             }
-        }
+        
+       // }
     }
 
     protected void ResetClick(object sender, EventArgs e)
@@ -141,11 +146,85 @@ public partial class Test_01 : System.Web.UI.Page
      {
          string employeeID = GridView1.DataKeys[e.RowIndex].Values["Emp_ID"].ToString();
 
-         SqlConnection connec = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
+         //SqlConnection connec = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
          connec.Open();
          SqlCommand cmd = new SqlCommand("DELETE FROM Test WHERE [Emp_ID] = '" + employeeID + "'", connec);
          cmd.ExecuteNonQuery();
          connec.Close();
          GridDat();
      }
+
+
+    /* protected void lbtn_export_Click(object sender, EventArgs e)
+      {
+          try
+          {
+              Response.Clear();
+              Response.AddHeader("Content-Disposition", "attachment;filename=OverAllTest.xls");
+              Response.Charset = "";
+              Response.ContentType = "application/vnd.ms-excel";
+
+              StringWriter stringWrite = new StringWriter();
+              HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWrite);
+
+              GridView1.AllowPaging = false;
+              GridDat();
+
+              GridView1.RenderControl(htmlWrite);
+              GridView1.AllowPaging = true;
+
+              Response.Write(stringWrite.ToString());
+              Response.End();
+          }
+          catch (Exception ex)
+          {
+              Response.Write("Error exporting data: " + ex.Message);
+          }
+      }*/
+
+    protected void lbtn_export_Click(object sender, EventArgs e)
+     {
+       try
+        {
+             // Clear any previous content from the response
+             Response.Clear();
+
+             // Set the content type and header for Excel
+             Response.AddHeader("content-disposition", "attachment;filename=OverAllTest.xls");
+             Response.ContentType = "application/vnd.xls";
+
+             // Create a StringBuilder for capturing the HTML content
+             StringBuilder sb = new StringBuilder();
+             HtmlTextWriter htw = new HtmlTextWriter(new StringWriter(sb));
+
+             GridDat();
+
+             // Hide the GridView paging to avoid rendering it in Excel
+             GridView1.AllowPaging = false;
+             GridView1.DataBind();
+
+             // Create a temporary GridView to hold the data for rendering
+             GridView gvExport = new GridView();
+             gvExport.DataSource = GridView1.DataSource;
+             gvExport.AllowPaging = false;
+
+             // Apply styles to the temporary GridView for better Excel formatting
+             gvExport.HeaderStyle.ForeColor = Color.Black;
+             gvExport.HeaderStyle.BackColor = Color.LightBlue;
+
+             // Ensure the temporary GridView is bound and rendered
+             gvExport.DataBind();
+             gvExport.RenderControl(htw);
+
+             // Write the rendered content to the response stream
+             Response.Write(sb.ToString());
+             Response.End();
+        }
+         catch (Exception ex)
+         {
+             Response.Write(ex.Message);
+         }
+     } 
+
 }
+
