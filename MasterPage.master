@@ -1,0 +1,76 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+<style>
+
+#nav {
+    background-color:dodgerblue;
+    padding: 5px;
+    
+}
+
+ul {
+    list-style-type: none;
+}
+li a {
+    color: 
+#F1FAEE;
+    font-size: 20px;
+    column-width: 5%;
+}
+
+li {
+    display: inline;
+    padding-left: 2px;
+    column-width: 20px;
+}
+
+a {
+    text-decoration: none;
+    margin-left: 20px;
+}
+footer{
+     background-color:dodgerblue;
+    padding: 5px;
+    height:60px;
+}
+
+li a:hover {
+    background-color: 
+#F3FFBD;
+    color: 
+#FF1654;
+    padding: 1%;
+}
+</style>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="home.aspx">Home</a></li>
+            <li><a href="#">Mail</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Task</a></li>
+        </ul>
+    </nav>
+   
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    <footer id="footer">
+        copyright @AmD
+    </footer>
+    </form>
+</body>
+</html>
