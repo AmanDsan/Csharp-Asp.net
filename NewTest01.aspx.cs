@@ -22,7 +22,7 @@ public partial class NewTest01 : System.Web.UI.Page
             SqlCommand cmdTL = new SqlCommand(queryTeamLead, connec);
             SqlDataReader drTeamLead = cmdTL.ExecuteReader();
             DropDownList1.DataSource = drTeamLead;
-            DropDownList1.DataTextField = "teamlead";
+            //DropDownList1.DataTextField = "teamlead";
             DropDownList1.DataValueField = "teamlead";
             DropDownList1.DataBind();
             drTeamLead.Close();
@@ -31,7 +31,7 @@ public partial class NewTest01 : System.Web.UI.Page
             SqlCommand cmdPM = new SqlCommand(queryProjectManager, connec);
             SqlDataReader drProjectManager = cmdPM.ExecuteReader();
             DropDownList2.DataSource = drProjectManager;
-            DropDownList2.DataTextField = "projmanager";
+            //DropDownList2.DataTextField = "projmanager";
             DropDownList2.DataValueField = "projmanager";
             DropDownList2.DataBind();
             drProjectManager.Close();
