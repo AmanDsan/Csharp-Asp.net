@@ -65,6 +65,9 @@
     <div class ="cent">
        <table>
            <tr>
+              <asp:Label ID="lblMessage" runat="server" ForeColor="Red"></asp:Label> <!-- Label to show message if data of that combination already exists.--> 
+           </tr>
+           <tr>
                <td class="align">Team Name</td>
                <td><asp:TextBox ID="TextBox1" runat="server"></asp:TextBox></td>
            </tr>

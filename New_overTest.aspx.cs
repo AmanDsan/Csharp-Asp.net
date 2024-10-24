@@ -58,6 +58,51 @@ public partial class New_overTest : System.Web.UI.Page
     protected void DataSubmit(object sender, EventArgs e)
     {
         connec.Open();
+
+        //adding message if teamname only already exists
+
+       /* string checkQuery = "SELECT COUNT(*) FROM tb_teammaster WHERE teamname = @teamname";
+        using (SqlCommand checkCmd = new SqlCommand(checkQuery, connec))
+        {
+            checkCmd.Parameters.AddWithValue("@teamname", TextBox1.Text.Trim());
+            int exists = (int)checkCmd.ExecuteScalar();
+
+            if (exists > 0)
+            {
+                lblMessage.Text = "Team name already exists!";
+                connec.Close();
+                return; 
+            }
+        }*/
+
+            //adding message if a row if that combination already exists
+                string checkQuery = @"
+                SELECT COUNT(*) 
+                FROM tb_teammaster 
+                WHERE teamname = @teamname 
+                  AND teamlead = @teamlead 
+                  AND projmanager = @projmanager
+                  AND location = @location";
+
+                using (SqlCommand checkCmd = new SqlCommand(checkQuery, connec))
+                {
+                    checkCmd.Parameters.AddWithValue("@teamname", TextBox1.Text.Trim());
+                    checkCmd.Parameters.AddWithValue("@teamlead", DropDownList1.SelectedItem.Value);
+                    checkCmd.Parameters.AddWithValue("@projmanager", DropDownList2.SelectedItem.Value);
+                    checkCmd.Parameters.AddWithValue("@location", DropDownList3.SelectedItem.Value);
+
+                    int exists = (int)checkCmd.ExecuteScalar();
+
+                    if (exists > 0)
+                    {
+                        lblMessage.Text = "The team with the specified details already exists!";
+                        connec.Close();
+                        return; 
+                    }
+                }
+                
+
+        //saving data which recieved from textbox and dropdown
         using (SqlCommand cmd = new SqlCommand("NewoverTest", connec))
         {
             cmd.CommandType = CommandType.StoredProcedure;
@@ -67,7 +112,11 @@ public partial class New_overTest : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@location", DropDownList3.SelectedItem.Text);
             cmd.ExecuteNonQuery();
         }
+        // Clear any previous messages
+        lblMessage.Text = "";
+
         GridDat();
+        connec.Close();
     }
 
     protected void GridDat()
@@ -129,36 +178,6 @@ public partial class New_overTest : System.Web.UI.Page
              GridView1.DataBind();
          }*/
     }
-
-    /*
-
-    protected void GridDat()
-    {
-        using (SqlConnection connec = new SqlConnection(ConfigurationSettings.AppSettings["ConnectionString"].ToString()))
-        {
-            connec.Open();
-
-            // Update the query to join tb_teammaster with tb_EmployeeMaster to get team lead names
-            string query = @"
-            SELECT tm.*, 
-                   em1.empname AS teamleadname, 
-                   em2.empname AS projmanagername 
-            FROM tb_teammaster tm
-            LEFT JOIN tantra.dbo.tb_EmployeeMaster em1 ON tm.teamlead = em1.empid
-            LEFT JOIN tantra.dbo.tb_EmployeeMaster em2 ON tm.projmanager = em2.empid";
-
-            SqlCommand com = new SqlCommand(query, connec);
-            SqlDataAdapter adapter = new SqlDataAdapter(com);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
-        }
-    }
-    */
-
-
 
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
