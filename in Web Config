@@ -1,0 +1,6 @@
+ <appSettings>
+    <add key="ConnectionString" value="User Id=sa;password=Dgsts@2024;database=Employee Data;server=172.16.10.176"/>
+  </appSettings>
+
+
+in the webconfig it is necessary for the authentication purpose
