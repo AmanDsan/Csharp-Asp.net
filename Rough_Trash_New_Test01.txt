@@ -1,0 +1,67 @@
+SELECT TOP (1000) [recno]
+      ,[empid]
+      ,[empname]
+      ,[dob]
+      ,[doj]
+      ,[probationperiod]
+      ,[gender]
+      ,[email]
+      ,[designation]
+      ,[emprole]
+      ,[projectmanager]
+      ,[reportmanager]
+      ,[team]
+      ,[shift]
+      ,[location]
+      ,[pass]
+      ,[resigndate]
+      ,[status]
+      ,[fathername]
+      ,[mobile]
+      ,[flat]
+      ,[building]
+      ,[road]
+      ,[area]
+      ,[city]
+      ,[pincode]
+      ,[district]
+      ,[state]
+      ,[totalexp]
+      ,[exp_as_on_date]
+      ,[grade]
+      ,[dept]
+      ,[division]
+      ,[temp1]
+      ,[temp2]
+      ,[temp3]
+      ,[temp4]
+      ,[temp5]
+      ,[temp6]
+      ,[temp7]
+      ,[temp8]
+      ,[temp9]
+      ,[temp10]
+      ,[temp11]
+      ,[temp12]
+      ,[temp13]
+      ,[temp14]
+      ,[temp15]
+  FROM [tantra].[dbo].[tb_EmployeeMaster]
+
+  --SELECT tm.*,em1.empname AS teamlead, em2.empname AS projmanager FROM tb_teammaster tm  LEFT JOIN tantra.dbo.tb_EmployeeMaster em1 ON tm.teamlead = em1.empid  LEFT JOIN tantra.dbo.tb_EmployeeMaster em2 ON tm.projmanager = em2.empid";
+            
+  Select  b.empname  from [Employee data].[dbo].[tb_teammaster] a left join [tantra].[dbo].[tb_EmployeeMaster] b on a.teamlead = b.empid ;
+  Select  b.empname  from [Employee data].[dbo].[tb_teammaster] a left join [tantra].[dbo].[tb_EmployeeMaster] b on a.projmanager = b.empid ;
+
+  --Select tl.empname,pm.empname from [tantra].[dbo].[tb_EmployeeMaster] tl Left Join [tantra].[dbo].[tb_EmployeeMaster] pm on tl.empname = tl.empid  LEFT JOIN tantra.dbo.tb_EmployeeMaster em2 ON pm.empname = pm.empid ;
+
+ SELECT 
+                tm.teamid,tm.teamname,
+                em1.empname AS teamlead, 
+                em2.empname AS projmanager ,tm.teamlogo,tm.dollarval,tm.status,tm.location,tm.temp1,tm.temp2,tm.temp2,tm.temp3,tm.temp4,tm.temp5,tm.temp6,tm.temp7,tm.temp8,tm.temp9,tm.temp10
+            FROM 
+                [Employee data].[dbo].[tb_teammaster] tm  
+            LEFT JOIN 
+                [tantra].[dbo].[tb_EmployeeMaster] em1 ON tm.teamlead = em1.empid  
+            LEFT JOIN 
+                [tantra].[dbo].[tb_EmployeeMaster] em2 ON tm.projmanager = em2.empid;

@@ -1,0 +1,94 @@
+GO
+
+CREATE PROCEDURE NewoverTest
+    @teamname nvarchar(200),
+    @teamlead nvarchar(100),
+    @projmanager nvarchar(100),
+    @location nvarchar(100) 
+AS
+BEGIN
+    INSERT INTO tb_teammaster (
+        [teamname], 
+        [teamlead], 
+        [projmanager], 
+        [location] 
+    )
+    VALUES (
+        @teamname, 
+        @teamlead, 
+        @projmanager, 
+        @location
+    );
+END;
+
+GO
+
+--------------------------Altered the stored Procedure--------------------------------
+
+ALTER PROCEDURE dbo.NewoverTest
+    @teamname nvarchar(200),
+    @teamlead nvarchar(100),
+    @projmanager nvarchar(100),
+    @location nvarchar(100),
+    @status nvarchar(1) = 'Y',
+    @temp1 nvarchar(50) = 'No', 
+    @temp2 nvarchar(50) = 'No',
+    @temp3 nvarchar(50) = 'No',
+    @temp4 nvarchar(50) = 'No',
+    @temp5 nvarchar(50) = 'No',
+    @temp6 nvarchar(50) = 'No',
+    @temp7 nvarchar(50) = 'No',
+    @temp8 nvarchar(50) = 'No',
+    @temp9 nvarchar(50) = 'No',
+    @temp10 nvarchar(50) = 'No'
+AS
+BEGIN
+    INSERT INTO tb_teammaster (
+        [teamid], 
+        [teamname], 
+        [teamlead], 
+        [projmanager], 
+        [location], 
+        [status], 
+        [temp1],
+        [temp2],
+        [temp3],
+        [temp4],
+        [temp5],
+        [temp6],
+        [temp7],
+        [temp8],
+        [temp9],
+        [temp10]
+    ) 
+    VALUES (
+        NEXT VALUE FOR TeamID_Sequence,  -- Auto-generate teamid using the sequence  --- for this we have to make a sequence which is done below
+        @teamname, 
+        @teamlead, 
+        @projmanager, 
+        @location, 
+        @status, 
+        @temp1, 
+        @temp2, 
+        @temp3, 
+        @temp4, 
+        @temp5, 
+        @temp6, 
+        @temp7, 
+        @temp8, 
+        @temp9, 
+        @temp10
+    );
+END;
+
+-----------------------------------------This is the sequence creation---------------------------
+CREATE SEQUENCE TeamID_Sequence
+    AS INT
+    START WITH 1
+    INCREMENT BY 1;
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+SELECT * FROM [Employee Data].[dbo].[tb_teammaster]
